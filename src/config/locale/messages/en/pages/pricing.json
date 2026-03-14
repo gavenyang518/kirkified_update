@@ -1,127 +1,114 @@
 {
   "metadata": {
-    "title": "Pricing",
+    "title": "Kirkifie AI Pricing",
     "description": "Start with a plan"
-  },
+  }, 
   "page": {
     "title": "ShipAny Pricing",
     "sections": {
       "pricing": {
         "id": "pricing",
-        "title": "Pricing",
-        "description": "Get all features of ShipAny, Ship your AI SaaS startups fast.",
+        "title": "Kirkifie AI Pricing",
+        "description": "Get all features of Kirkified AI, Generate hilarious Charlie Kirk face swap memes with AI.",
         "groups": [
           {
             "name": "one-time",
             "title": "Pay as you go"
-          },
-          {
-            "name": "monthly",
-            "title": "Monthly",
-            "is_featured": true,
-            "label": "save 15%"
-          },
-          {
-            "name": "yearly",
-            "title": "Annually"
           }
         ],
         "items": [
           {
             "title": "Starter",
-            "description": "Get started with your first SaaS startup.",
+            "description": "Perfect for trying out Kirkify.",
             "features_title": "Includes",
             "features": [
-              "100 credits, valid for 1 month",
-              "NextJS boilerplate",
-              "SEO-friendly structure",
-              "Payment with Stripe",
-              "Data storage with Supabase",
-              "Google Oauth & One-Tap Login",
-              "i18n support"
+              "40 credits (20 images)",
+              "Valid for 1 month",
+              "Ad-free experienc",
+              "Free download access",
+              "Standard generation speed",
+              "Email suppor"
             ],
             "interval": "one-time",
-            "amount": 9900,
+            "amount": 990,
             "currency": "USD",
-            "price": "$99",
-            "original_price": "$199",
+            "price": "$9.9",
+            "original_price": "$19.9",
             "unit": "",
             "is_featured": false,
-            "tip": "Pay once. Build unlimited projects!",
+            "tip": "Pay once. Create 20 hilarious Kirkify memes!",
             "button": {
-              "title": "Get ShipAny",
+              "title": "Get Kirkify",
               "url": "/#pricing",
               "icon": "RiFlashlightFill"
             },
             "product_id": "starter",
-            "product_name": "ShipAny Boilerplate Starter",
-            "credits": 100,
+            "product_name": "Kirkify Starter",
+            "credits": 40,
             "valid_days": 30,
             "group": "one-time"
           },
           {
-            "title": "Standard",
-            "description": "Ship Fast with your SaaS Startups.",
+            "title": "Popular",
+            "description": "For regular Kirkify meme creators.",
             "label": "Popular",
             "features_title": "Everything in Starter, plus",
             "features": [
-              "200 credits, valid for 3 month",
-              "Deploy with Vercel or Cloudflare",
-              "Generation of Privacy & Terms",
-              "Google Analytics Integration",
-              "Google Search Console Integration",
-              "Discord community",
-              "Technical support for your first ship",
-              "Lifetime updates"
+              "600 credits (300 images)",
+              "Valid for 3 months",
+              "Ad-free experience",
+              "Free download access",
+              "Priority generation queue",
+              "Priority email support"
             ],
             "interval": "one-time",
-            "amount": 19900,
+            "amount": 1990,
             "currency": "USD",
-            "price": "$199",
-            "original_price": "$299",
+            "price": "$19.9",
+            "original_price": "$29.9",
             "unit": "",
             "is_featured": true,
-            "tip": "Pay once. Build unlimited projects!",
+            "tip": "Pay once. Create 300 Kirkify memes with priority access!",
             "button": {
-              "title": "Get ShipAny",
+              "title": "Get Kirkify",
               "url": "/#pricing",
               "icon": "RiFlashlightFill"
             },
-            "product_id": "standard",
-            "product_name": "ShipAny Boilerplate Standard",
-            "credits": 200,
+            "product_id": "Popular",
+            "product_name": "Kirkify Popular",
+            "credits": 600,
             "valid_days": 90,
             "group": "one-time"
           },
           {
-            "title": "Premium",
-            "description": "Ship Any AI SaaS Startups.",
-            "features_title": "Everything in Standard, plus",
+            "title": "Pro",
+            "description": "For professional creators and businesses.",
+            "features_title": "Everything in Popular, plus",
             "features": [
-              "300 credits, valid for 1 year",
-              "Business Functions with AI",
-              "User Center",
-              "Credits System",
-              "API Sales for your SaaS",
-              "Admin System",
-              "Priority Technical Support"
+              "6000 credits (3,000 images)",
+              "Valid for 1 year",
+              "Ad-free experience",
+              "Free download access",
+              "Fastest generation speed",
+              "Dedicated account manager"
+            
             ],
             "interval": "one-time",
-            "amount": 29900,
+            "amount": 2990,
             "currency": "USD",
-            "price": "$299",
+            "price": "$99.9",
             "original_price": "$399",
             "unit": "",
             "is_featured": false,
-            "tip": "Pay once. Build unlimited projects!",
+            "tip": "Pay once. Create 3000 professional Kirkify memes!",
             "button": {
-              "title": "Get ShipAny",
+              "title": "Get Kirkify",
               "url": "/#pricing",
               "icon": "RiFlashlightFill"
             },
             "product_id": "premium",
-            "product_name": "ShipAny Boilerplate Premium",
-            "credits": 300,
+            "product_name": "Kirkify Pro",
+            "credits": 6000,
             "valid_days": 365,
             "group": "one-time"
           },
