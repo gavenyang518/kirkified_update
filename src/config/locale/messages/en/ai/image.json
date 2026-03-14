@@ -1,14 +1,14 @@
 {
   "metadata": {
-    "title": "AI Image Generator",
-    "description": "Generate images with AI models, support text-to-image and image-to-image."
+    "title": "Kirkified AI Image Generator",
+    "description": "Get Your Kirkified Image in Seconds"
   },
   "page": {
-    "title": "AI Image Generator",
-    "description": "Generate images with AI models, support text-to-image and image-to-image."
+    "title": "Kirkified AI Image Generator",
+    "description": "Get Your Kirkified Image in Seconds"
   },
   "generator": {
-    "title": "Image Generator",
+    "title": "Kirkify AI Image Generator",
     "description": "Generate images with AI models, support text-to-image and image-to-image.",
     "tabs": {
       "text-to-image": "Text to Image",

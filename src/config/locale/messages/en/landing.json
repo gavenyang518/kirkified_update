@@ -29,16 +29,9 @@
           "icon": "DollarSign"
         },
         {
-          "title": "AI",
-          "icon": "RiRobot2Line",
-          "children": [
-            {
-              "title": "AI Image Generator",
-              "description": "Use AI to generate images",
-              "url": "/ai-image-generator",
-              "icon": "RiImage2Line"
-            }
-          ]
+          "title": "AI Image Generator",
+          "url": "/ai-image-generator",
+          "icon": "RiRobot2Line"
         },
         {
           "title": "Content",
