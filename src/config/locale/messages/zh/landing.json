@@ -112,9 +112,10 @@
   },
   "footer": {
     "id": "footer",
+    "show_built_with": false,
     "brand": {
       "title": "ShipAny Two",
-      "description": "ShipAny 是专为 AI SaaS 创业项目打造的 NextJS 模板。丰富模板与组件，极速交付你的产品。",
+      "description": "仅用于 AI 讽刺创作，不代表真实人物。Kirkify 输出默认带有标签与水印。请仅使用你拥有合法权利的图片。禁止将 Kirkify 用于骚扰、欺骗或误导。禁止使用上传内容冒充私人个体、移除披露标识或误导观众。继续使用即表示你同意以明确的戏仿方式发布内容，并至少保留一个可见标签。",
       "logo": {
         "src": "/logo.png",
         "alt": "ShipAny Two",

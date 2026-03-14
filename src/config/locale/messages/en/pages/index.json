@@ -2,42 +2,27 @@
   "page": {
     "show_sections": [
       "hero",
-      "logos",
       "introduce",
       "benefits",
       "usage",
       "features",
-      "stats",
-      "testimonials",
       "faq",
       "cta"
     ],
     "sections": {
       "hero": {
         "id": "hero",
-        "title": "Ship AI Startups in hours, not days",
-        "highlight_text": "in hours",
-        "description": "ShipAny is a NextJS boilerplate for building AI SaaS startups.<br/>Ship Fast with a variety of templates and components.",
-        "announcement": {
-          "badge": "New",
-          "title": "🎉 ShipAny Template Two",
-          "url": "/pricing"
-        },
+        "title": "Drag & drop your image. Watch it Kirkify instantly.",
+        "highlight_text": "Kirkify instantly",
+        "description": "Welcome to the ultimate kirkified meme generator at kirkified.net.<br/>Get any picture flawlessly kirkified with advanced AI face tracking, neon framing, and viral aesthetic effects. The kirkified transformation is completely seamless.",
         "tip": "🎁 Special offer for the first 1000 users",
         "buttons": [
           {
-            "title": "Get Started",
+            "title": "Get Kirkified Now",
             "icon": "Zap",
-            "url": "/pricing",
+            "url": "/ai-image-generator",
             "target": "_self",
             "variant": "default"
-          },
-          {
-            "title": "Read Document",
-            "icon": "BookOpenText",
-            "url": "/docs",
-            "target": "_blank",
-            "variant": "outline"
           }
         ],
         "show_avatars": true,
@@ -60,61 +45,20 @@
           "alt": "hero"
         }
       },
-      "logos": {
-        "id": "logos",
-        "title": "ShipAny is built on the shoulders of giants",
-        "items": [
-          {
-            "title": "Next.js",
-            "image": {
-              "src": "/imgs/logos/nextjs.svg",
-              "alt": "Next.js"
-            }
-          },
-          {
-            "title": "React",
-            "image": {
-              "src": "/imgs/logos/react.svg",
-              "alt": "React"
-            }
-          },
-          {
-            "title": "TailwindCSS",
-            "image": {
-              "src": "/imgs/logos/tailwindcss.svg",
-              "alt": "TailwindCSS"
-            }
-          },
-          {
-            "title": "Shadcn/UI",
-            "image": {
-              "src": "/imgs/logos/shadcn.svg",
-              "alt": "Shadcn/UI"
-            }
-          },
-          {
-            "title": "Vercel",
-            "image": {
-              "src": "/imgs/logos/vercel.svg",
-              "alt": "Vercel"
-            }
-          }
-        ]
-      },
       "introduce": {
         "block": "features-list",
         "id": "introduce",
-        "title": "What is ShipAny",
+        "title": "What is Kirkified?",
         "label": "Introduce",
-        "description": "ShipAny is a NextJS boilerplate for building AI SaaS startups, including templates, components, and documentation.",
+        "description": "",
         "image": {
-          "src": "/imgs/features/landing-page.png",
+          "src": "/imgs/features/landing-page-kirkified.png",
           "alt": "introduce"
         },
         "items": [
           {
-            "title": "Ready-to-use Templates",
-            "description": "Choose from dozens of production-ready AI SaaS templates to quickly start your project.",
+            "title": "A Viral Face-Swap Phenomenon",
+            "description": "Being \"kirkified\" refers to the massive internet meme trend of digitally swapping Charlie Kirk's face onto popular reaction images, GIFs, and viral videos (such as the famous IShowSpeed clip) using advanced AI technology.",
             "icon": "RiNextjsFill",
             "image": {
               "src": "/imgs/features/1.png",
@@ -122,8 +66,8 @@
             }
           },
           {
-            "title": "Infrastructure Setup",
-            "description": "Get instant access to scalable infrastructure with best practices built-in.",
+            "title": "A Distinctive Digital Aesthetic",
+            "description": "It is more than just a simple face replacement. A thoroughly kirkified image features a highly recognizable, humorous visual style that includes seamless facial mapping, eerie skin tone blending, and often signature neon framing, glitch effects, or color distortions.",
             "icon": "RiDatabase2Line",
             "image": {
               "src": "/imgs/features/2.png",
@@ -131,20 +75,11 @@
             }
           },
           {
-            "title": "Quick Deployment",
-            "description": "Deploy your AI SaaS application to production in hours, not days.",
+            "title": "A Community-Driven Meme Culture",
+            "description": "Originating on X (Twitter) in September 2025 and rapidly taking over TikTok and Reddit, the kirkified movement has evolved into a standardized parody format. Users actively request and share kirkified versions of trending content to create instant viral reactions across social media.",
             "icon": "RiCloudyFill",
             "image": {
               "src": "/imgs/features/3.png",
-              "alt": "introduce"
-            }
-          },
-          {
-            "title": "AI Integration",
-            "description": "Integrate AI into your project with ease using our built-in AI SDK.",
-            "icon": "RiRobot2Line",
-            "image": {
-              "src": "/imgs/features/4.png",
               "alt": "introduce"
             }
           }
@@ -154,13 +89,14 @@
       "benefits": {
         "block": "features-accordion",
         "id": "benefits",
-        "title": "Why Choose ShipAny",
+        "title": "Why Choose Kirkified?",
         "label": "Benefits",
-        "description": "Get everything you need to launch your AI startup - from ready-to-use templates to technical support.",
+        "show_image": false,
+        "description": "",
         "items": [
           {
-            "title": "Complete Framework",
-            "description": "Built on Next.js with authentication, payments, and AI integration - everything works out of the box.",
+            "title": "Lightning-Fast & Zero-Barrier Experience",
+            "description": "No sign-ups or complex Photoshop skills required. As a lightweight, browser-based tool, simply drag and drop your image, and the AI automatically detects and swaps the face in just 10 to 30 seconds, instantly giving you a ready-to-share kirkified meme.",
             "icon": "RiNextjsFill",
             "image": {
               "src": "/imgs/features/user-billing.png",
@@ -168,8 +104,8 @@
             }
           },
           {
-            "title": "Rich Templates Library",
-            "description": "Choose from various AI SaaS templates to kickstart your project - chatbots, image generation, and more.",
+            "title": "Top-Tier AI Blending & High-Resolution Quality",
+            "description": "Powered by state-of-the-art deep learning neural networks optimized specifically for the kirkified aesthetic. It accurately maps facial structures while seamlessly blending skin tones, lighting, and complex details like hairlines, ensuring your kirkified output is both highly realistic and exported in stunning high definition.",
             "icon": "RiClapperboardAiLine",
             "image": {
               "src": "/imgs/features/admin-settings.png",
@@ -177,11 +113,11 @@
             }
           },
           {
-            "title": "Technical Guidance",
-            "description": "Get dedicated support and join our developer community to ensure your successful launch.",
+            "title": "100% Free & Absolute Privacy Protection",
+            "description": "Enjoy the core kirkified generation service completely free with no hidden subscription traps. We strictly enforce a \"privacy-first\" policy-all image processing happens in a secure environment, and your original files are permanently deleted immediately after generation. We never store, track, or misuse your personal data.",
             "icon": "RiCodeFill",
             "image": {
-              "src": "/imgs/features/landing-page.png",
+              "src": "/imgs/features/landing-page-kirkified.png",
               "alt": "benefits"
             }
           }
@@ -190,8 +126,8 @@
       "usage": {
         "block": "features-step",
         "id": "usage",
-        "title": "How to Launch with ShipAny",
-        "description": "Get your AI SaaS startup running in three simple steps:",
+        "title": "Kirkify AI your photos in seconds",
+        "description": "",
         "image": {
           "src": "/imgs/features/1.png",
           "alt": "usage"
@@ -200,34 +136,26 @@
         "text_align": "center",
         "items": [
           {
-            "title": "Get ShipAny",
-            "description": "Buy ShipAny with a one-time payment. Check your email for the code and documentation.",
+            "title": "Upload",
+            "description": "Select the source image you desperately want to see kirkified. Whether it's a friend, a celebrity, or a classic meme template, simply drag it into the kirkified drop zone. The AI scans the structural integrity to prepare it for the kirkified process.",
             "image": {
               "src": "/imgs/features/5.png",
               "alt": "usage"
             }
           },
           {
-            "title": "Start Your Project",
-            "description": "Read the documentation and clone the code of ShipAny. Start building your AI SaaS startup.",
+            "title": "Kirkify",
+            "description": "Click the button and let the neural network do its job. The AI applies a predefined kirkified transformation, swapping facial features with eerie precision. The system maps the face, blends the lighting, and applies the recognizable kirkified distortion. It is lightning fast-your image is fully kirkified in 10 to 30 seconds.",
             "image": {
               "src": "/imgs/features/6.png",
               "alt": "usage"
             }
           },
           {
-            "title": "Customize Your Project",
-            "description": "Modify the template with your data and contents. Specific AI functionality needs.",
+            "title": "Share",
+            "description": "Download your freshly kirkified content. Because our kirkified generator automatically optimizes aspect ratios for social media, your newly kirkified meme is ready to be deployed instantly to X, TikTok, Discord, or Reddit. Let the world see your kirkified creation.",
             "image": {
               "src": "/imgs/features/7.png",
-              "alt": "usage"
-            }
-          },
-          {
-            "title": "Deploy to Production",
-            "description": "Deploy your project to production with a few steps and start serving customers immediately.",
-            "image": {
-              "src": "/imgs/features/8.png",
               "alt": "usage"
             }
           }
@@ -236,60 +164,25 @@
       },
       "features": {
         "id": "features",
-        "title": "Key Features of ShipAny",
-        "description": "Everything you need to launch your AI SaaS startup quickly and efficiently.",
+        "title": "Key Features",
+        "description": "",
         "items": [
           {
-            "title": "Next.js Boilerplate",
-            "description": "Production-ready Next.js templates with SEO-friendly structure and i18n support.",
-            "icon": "RiNextjsFill"
-          },
-          {
-            "title": "Authentication & Payments",
-            "description": "Integrated Google OAuth, one-tap login, and Stripe payment processing.",
-            "icon": "RiKey2Fill"
-          },
-          {
-            "title": "Data Infrastructure",
-            "description": "Built-in Supabase integration for reliable and scalable data storage.",
-            "icon": "RiDatabase2Line"
-          },
-          {
-            "title": "One-Click Deployment",
-            "description": "Seamless deployment to Vercel or Cloudflare with automated setup.",
-            "icon": "RiCloudy2Fill"
-          },
-          {
-            "title": "Business Analytics",
-            "description": "Integrated Google Analytics and Search Console for tracking growth.",
-            "icon": "RiBarChart2Line"
-          },
-          {
-            "title": "AI-Ready Infrastructure",
-            "description": "Pre-configured AI integration with built-in credits system and API sales.",
+            "title": "Instant AI Face Mapping",
+            "description": "Upload any image and our advanced AI automatically detects faces, seamlessly swapping them with ultra-realistic skin tone and lighting blending in just 10-30 seconds—no technical skills required.",
             "icon": "RiRobot2Line"
+          },
+          {
+            "title": "Distinctive Viral Aesthetics",
+            "description": "Automatically apply signature \"kirkified\" visual filters to your content, including custom neon framing, glitch effects, and color distortions optimized for high-resolution sharing on X, TikTok, and Reddit.",
+            "icon": "Sparkles"
+          },
+          {
+            "title": "Privacy-First Processing",
+            "description": "Your personal data is completely secure. All image transformations are processed locally or on privacy-focused servers, and your original source files are immediately deleted the moment your meme is generated.",
+            "icon": "ShieldCheck"
           }
         ]
-      },
-      "stats": {
-        "id": "stats",
-        "title": "People Love ShipAny",
-        "description": "for it's easy to use and fast to ship.",
-        "items": [
-          {
-            "title": "999+",
-            "description": "Customers"
-          },
-          {
-            "title": "200+",
-            "description": "Blocks"
-          },
-          {
-            "title": "50+",
-            "description": "Templates"
-          }
-        ],
-        "className": "bg-muted"
       },
       "testimonials": {
         "id": "testimonials",
@@ -354,52 +247,37 @@
       },
       "faq": {
         "id": "faq",
-        "title": "Frequently Asked Questions About ShipAny",
-        "description": "Have another question? Contact us on Discord or by email.",
+        "title": "Quick answers",
+        "description": "",
         "items": [
           {
-            "question": "What exactly is ShipAny and how does it work?",
-            "answer": "ShipAny is a comprehensive NextJS boilerplate designed specifically for building AI SaaS startups. It provides ready-to-use templates, infrastructure setup, and deployment tools that help you launch your AI business in hours instead of days."
+            "question": "What exactly does it mean to be kirkified?",
+            "answer": "When an image or video is \"kirkified\", it means it has undergone a specific AI face swap process-usually placing Charlie Kirk's face onto the subject, accompanied by a distinct neon or distorted visual filter. A kirkified meme is highly recognizable. The kirkified trend is a distinct cultural moment; it is not just any edit, but a standardized format that makes an image undeniably, hilariously kirkified."
           },
           {
-            "question": "Do I need advanced technical skills to use ShipAny?",
-            "answer": "While basic programming knowledge is helpful, ShipAny is designed to be developer-friendly. Our templates and documentation make it easy to get started, even if you're not an expert in AI or cloud infrastructure."
+            "question": "How fast is the kirkified generation process?",
+            "answer": "Incredibly fast. Because our kirkified AI uses optimized browser-based architecture and state-of-the-art neural networks, your photo is typically kirkified in under 30 seconds. You do not need complex prompts to get an image kirkified; the system automatically detects faces and outputs the final kirkified result almost instantly."
           },
           {
-            "question": "What types of AI SaaS can I build with ShipAny?",
-            "answer": "ShipAny supports a wide range of AI applications, from content generation to data analysis tools. Our templates cover popular use cases like AI chatbots, content generators, image processing apps, and more."
+            "question": "Do I need design skills to make a kirkified meme?",
+            "answer": "Not at all! You don't need Photoshop or video editing experience to create kirkified content. The kirkified meme generator handles all the heavy lifting. The AI manages the facial mapping, lighting analysis, and the kirkified style transfer. Just upload a clear, front-facing image, and the software ensures the result is perfectly kirkified."
           },
           {
-            "question": "How long does it typically take to launch with ShipAny?",
-            "answer": "With ShipAny, you can have a working prototype in hours and a production-ready application in hours. Our one-click deployment and pre-configured infrastructure significantly reduce the traditional months-long development cycle."
-          },
-          {
-            "question": "What's included in the ShipAny infrastructure?",
-            "answer": "ShipAny provides a complete infrastructure stack including authentication, database setup, API integration, payment processing, and scalable cloud deployment. Everything is pre-configured following industry best practices."
-          },
-          {
-            "question": "Can I customize the templates to match my brand?",
-            "answer": "Absolutely! All ShipAny templates are fully customizable. You can modify the design, features, and functionality to match your brand identity and specific business requirements while maintaining the robust underlying infrastructure."
+            "question": "Is the kirkified tool safe and private?",
+            "answer": "Yes. Your privacy is paramount when getting your images kirkified. Any photo you upload to be kirkified is processed securely. As soon as the kirkified meme is generated and downloaded, the original files are purged. We never store your photos after they have been kirkified."
           }
         ]
       },
       "cta": {
         "id": "cta",
-        "title": "Ship your first AI SaaS Startup",
-        "description": "Start from here, ship with ShipAny.",
+        "title": "Drop a photo and watch it Kirkify AI",
+        "description": "Ready to join the ultimate internet phenomenon? Every kirkified masterpiece starts with a single upload.<br/>Whether you want a neon aesthetic or a hyper-realistic face swap, getting your images kirkified has never been easier or faster. Experience the magic of the kirkified generator today.",
         "buttons": [
           {
-            "title": "Get ShipAny",
-            "url": "https://shipany.ai",
-            "target": "_blank",
+            "title": "Get Kirkified Now",
+            "url": "/ai-image-generator",
+            "target": "_self",
             "icon": "Zap"
-          },
-          {
-            "title": "Read Document",
-            "url": "/docs",
-            "target": "_blank",
-            "variant": "outline",
-            "icon": "BookOpenText"
           }
         ],
         "className": "bg-muted"
