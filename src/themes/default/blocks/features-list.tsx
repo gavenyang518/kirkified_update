@@ -14,6 +14,7 @@ export function FeaturesList({
   section: Section;
   className?: string;
 }) {
+  const itemCount = section.items?.length ?? 0;
   return (
     // Prevent horizontal scrolling
     <section
@@ -80,7 +81,15 @@ export function FeaturesList({
 
         <ScrollAnimation delay={0.1}>
           {/* Prevent horizontal scrolling, min-w-0 and break-words */}
-          <div className="relative grid min-w-0 grid-cols-1 gap-x-3 gap-y-6 border-t pt-12 break-words sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+          <div
+    className={cn(
+      'relative grid min-w-0 grid-cols-1 gap-x-3 gap-y-6 border-t pt-12 break-words sm:grid-cols-2 sm:gap-6',
+      itemCount <= 1 && 'lg:grid-cols-1',
+      itemCount === 2 && 'lg:grid-cols-2',
+      itemCount === 3 && 'lg:grid-cols-3',
+      itemCount >= 4 && 'lg:grid-cols-4'
+    )}
+  >   
             {section.items?.map((item, idx) => (
               <div className="min-w-0 space-y-3 break-words" key={idx}>
                 <div className="flex min-w-0 items-center gap-2">

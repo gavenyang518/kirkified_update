@@ -33,13 +33,7 @@
           "alt": "hero",
           "width": 1200,
           "height": 800
-        },
-        "image_invert": {
-          "src": "/imgs/features/admin-dark.png",
-          "alt": "hero",
-          "width": 1200,
-          "height": 800
-        },
+        }, 
         "background_image": {
           "src": "/imgs/bg/tree.jpg",
           "alt": "hero"
