@@ -26,17 +26,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/shared/components/ui/card';
-import { Label } from '@/shared/components/ui/label';
 import { Progress } from '@/shared/components/ui/progress';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/shared/components/ui/select';
-import { Tabs, TabsList, TabsTrigger } from '@/shared/components/ui/tabs';
-import { Textarea } from '@/shared/components/ui/textarea';
 import { useAppContext } from '@/shared/contexts/app';
 import { cn } from '@/shared/lib/utils';
 
@@ -66,87 +56,15 @@ interface BackendTask {
   taskResult: string | null;
 }
 
-type ImageGeneratorTab = 'text-to-image' | 'image-to-image';
-
 const POLL_INTERVAL = 5000;
 const GENERATION_TIMEOUT = 180000;
-const MAX_PROMPT_LENGTH = 2000;
+const FIXED_PROVIDER = 'replicate';
+const FIXED_MODEL =
+  'pikachupichu25/image-faceswap:94b109952d4dd3cb6e9947340a6a099cc9a4821af8807a879c1f7af92e2a3b00';
+const DEFAULT_PROMPT = 'face swap';
+const OFFICIAL_SWAP_IMAGE = 'https://iili.io/fiqtZTG.jpg';
 
-const MODEL_OPTIONS = [
-  {
-    value: 'google/nano-banana-pro',
-    label: 'Nano Banana Pro',
-    provider: 'replicate',
-    scenes: ['text-to-image', 'image-to-image'],
-  },
-  {
-    value: 'bytedance/seedream-4',
-    label: 'Seedream 4',
-    provider: 'replicate',
-    scenes: ['text-to-image', 'image-to-image'],
-  },
-  {
-    value: 'fal-ai/nano-banana-pro',
-    label: 'Nano Banana Pro',
-    provider: 'fal',
-    scenes: ['text-to-image'],
-  },
-  {
-    value: 'fal-ai/nano-banana-pro/edit',
-    label: 'Nano Banana Pro',
-    provider: 'fal',
-    scenes: ['image-to-image'],
-  },
-  {
-    value: 'fal-ai/bytedance/seedream/v4/edit',
-    label: 'Seedream 4',
-    provider: 'fal',
-    scenes: ['image-to-image'],
-  },
-  {
-    value: 'fal-ai/z-image/turbo',
-    label: 'Z-Image Turbo',
-    provider: 'fal',
-    scenes: ['text-to-image'],
-  },
-  {
-    value: 'fal-ai/flux-2-flex',
-    label: 'Flux 2 Flex',
-    provider: 'fal',
-    scenes: ['text-to-image'],
-  },
-  {
-    value: 'gemini-3-pro-image-preview',
-    label: 'Gemini 3 Pro Image Preview',
-    provider: 'gemini',
-    scenes: ['text-to-image', 'image-to-image'],
-  },
-  {
-    value: 'nano-banana-pro',
-    label: 'Nano Banana Pro',
-    provider: 'kie',
-    scenes: ['text-to-image', 'image-to-image'],
-  },
-];
 
-const PROVIDER_OPTIONS = [
-  {
-    value: 'replicate',
-    label: 'Replicate',
-  },
-  {
-    value: 'fal',
-    label: 'Fal',
-  },
-  {
-    value: 'gemini',
-    label: 'Gemini',
-  },
-  {
-    value: 'kie',
-    label: 'Kie',
-  },
-];
 
 function parseTaskResult(taskResult: string | null): any {
   if (!taskResult) {
@@ -203,21 +121,22 @@ function extractImageUrls(result: any): string[] {
 }
 
 export function ImageGenerator({
-  allowMultipleImages = true,
-  maxImages = 9,
+  allowMultipleImages = false,
+  maxImages = 1,
   maxSizeMB = 5,
   srOnlyTitle,
   className,
 }: ImageGeneratorProps) {
   const t = useTranslations('ai.image.generator');
 
-  const [activeTab, setActiveTab] =
-    useState<ImageGeneratorTab>('text-to-image');
-
-  const [costCredits, setCostCredits] = useState<number>(2);
-  const [provider, setProvider] = useState(PROVIDER_OPTIONS[0]?.value ?? '');
-  const [model, setModel] = useState(MODEL_OPTIONS[0]?.value ?? '');
-  const [prompt, setPrompt] = useState('');
+  const [costCredits] = useState<number>(2);
+  const [faceTemplateMode, setFaceTemplateMode] = useState<
+    'official' | 'custom'
+  >('official');
+  const [customSwapItems, setCustomSwapItems] = useState<ImageUploaderValue[]>(
+    []
+  );
+  const [customSwapUrls, setCustomSwapUrls] = useState<string[]>([]);
   const [referenceImageItems, setReferenceImageItems] = useState<
     ImageUploaderValue[]
   >([]);
@@ -242,45 +161,7 @@ export function ImageGenerator({
     setIsMounted(true);
   }, []);
 
-  const promptLength = prompt.trim().length;
   const remainingCredits = user?.credits?.remainingCredits ?? 0;
-  const isPromptTooLong = promptLength > MAX_PROMPT_LENGTH;
-  const isTextToImageMode = activeTab === 'text-to-image';
-
-  const handleTabChange = (value: string) => {
-    const tab = value as ImageGeneratorTab;
-    setActiveTab(tab);
-
-    const availableModels = MODEL_OPTIONS.filter(
-      (option) => option.scenes.includes(tab) && option.provider === provider
-    );
-
-    if (availableModels.length > 0) {
-      setModel(availableModels[0].value);
-    } else {
-      setModel('');
-    }
-
-    if (tab === 'text-to-image') {
-      setCostCredits(2);
-    } else {
-      setCostCredits(4);
-    }
-  };
-
-  const handleProviderChange = (value: string) => {
-    setProvider(value);
-
-    const availableModels = MODEL_OPTIONS.filter(
-      (option) => option.scenes.includes(activeTab) && option.provider === value
-    );
-
-    if (availableModels.length > 0) {
-      setModel(availableModels[0].value);
-    } else {
-      setModel('');
-    }
-  };
 
   const taskStatusLabel = useMemo(() => {
     if (!taskStatus) {
@@ -321,6 +202,27 @@ export function ImageGenerator({
     () => referenceImageItems.some((item) => item.status === 'error'),
     [referenceImageItems]
   );
+
+  const handleCustomSwapChange = useCallback((items: ImageUploaderValue[]) => {
+    setCustomSwapItems(items);
+    const uploadedUrls = items
+      .filter((item) => item.status === 'uploaded' && item.url)
+      .map((item) => item.url as string);
+    setCustomSwapUrls(uploadedUrls);
+  }, []);
+
+  const isCustomSwapUploading = useMemo(
+    () => customSwapItems.some((item) => item.status === 'uploading'),
+    [customSwapItems]
+  );
+
+  const hasCustomSwapUploadError = useMemo(
+    () => customSwapItems.some((item) => item.status === 'error'),
+    [customSwapItems]
+  );
+
+  const selectedSwapImage =
+    faceTemplateMode === 'custom' ? customSwapUrls[0] : OFFICIAL_SWAP_IMAGE;
 
   const resetTaskState = useCallback(() => {
     setIsGenerating(false);
@@ -483,19 +385,13 @@ export function ImageGenerator({
       return;
     }
 
-    const trimmedPrompt = prompt.trim();
-    if (!trimmedPrompt) {
-      toast.error('Please enter a prompt before generating.');
-      return;
-    }
-
-    if (!provider || !model) {
-      toast.error('Provider or model is not configured correctly.');
-      return;
-    }
-
-    if (!isTextToImageMode && referenceImageUrls.length === 0) {
+    if (referenceImageUrls.length === 0) {
       toast.error('Please upload reference images before generating.');
+      return;
+    }
+
+    if (!selectedSwapImage) {
+      toast.error('Please select or upload a face template first.');
       return;
     }
 
@@ -508,9 +404,8 @@ export function ImageGenerator({
     try {
       const options: any = {};
 
-      if (!isTextToImageMode) {
-        options.image_input = referenceImageUrls;
-      }
+      options.target_image = referenceImageUrls[0];
+      options.swap_image = selectedSwapImage;
 
       const resp = await fetch('/api/ai/generate', {
         method: 'POST',
@@ -519,10 +414,10 @@ export function ImageGenerator({
         },
         body: JSON.stringify({
           mediaType: AIMediaType.IMAGE,
-          scene: isTextToImageMode ? 'text-to-image' : 'image-to-image',
-          provider,
-          model,
-          prompt: trimmedPrompt,
+          scene: 'image-to-image',
+          provider: FIXED_PROVIDER,
+          model: FIXED_MODEL,
+          prompt: DEFAULT_PROMPT,
           options,
         }),
       });
@@ -550,9 +445,9 @@ export function ImageGenerator({
             imageUrls.map((url, index) => ({
               id: `${newTaskId}-${index}`,
               url,
-              provider,
-              model,
-              prompt: trimmedPrompt,
+              provider: FIXED_PROVIDER,
+              model: FIXED_MODEL,
+              prompt: DEFAULT_PROMPT,
             }))
           );
           toast.success('Image generated successfully');
@@ -620,96 +515,93 @@ export function ImageGenerator({
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6 pb-8">
-                <Tabs value={activeTab} onValueChange={handleTabChange}>
-                  <TabsList className="bg-primary/10 grid w-full grid-cols-2">
-                    <TabsTrigger value="text-to-image">
-                      {t('tabs.text-to-image')}
-                    </TabsTrigger>
-                    <TabsTrigger value="image-to-image">
-                      {t('tabs.image-to-image')}
-                    </TabsTrigger>
-                  </TabsList>
-                </Tabs>
+                <div className="space-y-4">
+                  <ImageUploader
+                    title="Upload Image to Kirkify"
+                    allowMultiple={allowMultipleImages}
+                    maxImages={maxImages}
+                    maxSizeMB={maxSizeMB}
+                    onChange={handleReferenceImagesChange}
+                    emptyHint={t('form.reference_image_placeholder')}
+                  />
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label>{t('form.provider')}</Label>
-                    <Select
-                      value={provider}
-                      onValueChange={handleProviderChange}
-                    >
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder={t('form.select_provider')} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {PROVIDER_OPTIONS.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label>{t('form.model')}</Label>
-                    <Select value={model} onValueChange={setModel}>
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder={t('form.select_model')} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {MODEL_OPTIONS.filter(
-                          (option) =>
-                            option.scenes.includes(activeTab) &&
-                            option.provider === provider
-                        ).map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
+                  {hasReferenceUploadError && (
+                    <p className="text-destructive text-xs">
+                      {t('form.some_images_failed_to_upload')}
+                    </p>
+                  )}
                 </div>
 
-                {!isTextToImageMode && (
-                  <div className="space-y-4">
-                    <ImageUploader
-                      title={t('form.reference_image')}
-                      allowMultiple={allowMultipleImages}
-                      maxImages={allowMultipleImages ? maxImages : 1}
-                      maxSizeMB={maxSizeMB}
-                      onChange={handleReferenceImagesChange}
-                      emptyHint={t('form.reference_image_placeholder')}
-                    />
+                <div className="space-y-3">
+                  <div className="text-sm font-medium">Select Face Template</div>
 
-                    {hasReferenceUploadError && (
-                      <p className="text-destructive text-xs">
-                        {t('form.some_images_failed_to_upload')}
-                      </p>
+                  <button
+                    type="button"
+                    onClick={() => setFaceTemplateMode('official')}
+                    className={cn(
+                      'w-full rounded-xl border p-4 text-left transition',
+                      faceTemplateMode === 'official'
+                        ? 'border-orange-500 bg-orange-50/30'
+                        : 'border-border'
                     )}
-                  </div>
-                )}
+                  >
+                    <div className="flex items-center gap-3">
+                      <img
+                        src={OFFICIAL_SWAP_IMAGE}
+                        alt="Charlie Kirk face template"
+                        className="h-14 w-14 rounded-md object-cover"
+                      />
+                      <div>
+                        <div className="font-semibold">Charlie Kirk</div>
+                        <div className="text-muted-foreground text-sm">
+                          Official face template
+                        </div>
+                      </div>
+                      <div className="ml-auto text-xl text-orange-500">
+                        {faceTemplateMode === 'official' ? '✓' : ''}
+                      </div>
+                    </div>
+                  </button>
 
-                <div className="space-y-2">
-                  <Label htmlFor="image-prompt">{t('form.prompt')}</Label>
-                  <Textarea
-                    id="image-prompt"
-                    value={prompt}
-                    onChange={(e) => setPrompt(e.target.value)}
-                    placeholder={t('form.prompt_placeholder')}
-                    className="min-h-32"
-                  />
-                  <div className="text-muted-foreground flex items-center justify-between text-xs">
-                    <span>
-                      {promptLength} / {MAX_PROMPT_LENGTH}
-                    </span>
-                    {isPromptTooLong && (
-                      <span className="text-destructive">
-                        {t('form.prompt_too_long')}
-                      </span>
+                  <button
+                    type="button"
+                    onClick={() => setFaceTemplateMode('custom')}
+                    className={cn(
+                      'w-full rounded-xl border p-4 text-left transition',
+                      faceTemplateMode === 'custom'
+                        ? 'border-orange-500 bg-orange-50/30'
+                        : 'border-border'
                     )}
-                  </div>
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="text-muted-foreground flex h-14 w-14 items-center justify-center rounded-md border border-dashed">
+                        ↑
+                      </div>
+                      <div>
+                        <div className="font-semibold">Custom Face</div>
+                        <div className="text-muted-foreground text-sm">
+                          Upload another Charlie Kirk photo or any face
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+
+                  {faceTemplateMode === 'custom' && (
+                    <div className="space-y-2 rounded-xl border border-dashed p-3">
+                      <ImageUploader
+                        allowMultiple={false}
+                        maxImages={1}
+                        maxSizeMB={maxSizeMB}
+                        onChange={handleCustomSwapChange}
+                        emptyHint="Upload custom swap face"
+                      />
+                      {hasCustomSwapUploadError && (
+                        <p className="text-destructive text-xs">
+                          Custom face upload failed. Please re-upload.
+                        </p>
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 {!isMounted ? (
@@ -729,10 +621,12 @@ export function ImageGenerator({
                     onClick={handleGenerate}
                     disabled={
                       isGenerating ||
-                      !prompt.trim() ||
-                      isPromptTooLong ||
+                      referenceImageUrls.length === 0 ||
                       isReferenceUploading ||
-                      hasReferenceUploadError
+                      hasReferenceUploadError ||
+                      isCustomSwapUploading ||
+                      (faceTemplateMode === 'custom' &&
+                        (hasCustomSwapUploadError || customSwapUrls.length === 0))
                     }
                   >
                     {isGenerating ? (

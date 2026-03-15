@@ -82,8 +82,14 @@ export class ReplicateProvider implements AIProvider {
 
     console.log('replicate input', input);
 
+    // Support pinned model versions via `owner/name:version` while keeping
+    // backward compatibility with plain `owner/name`.
+    const [modelName, version] = model.includes(':')
+      ? model.split(':', 2)
+      : [model, undefined];
+
     const output = await this.client.predictions.create({
-      model,
+      ...(version ? { version } : { model: modelName }),
       input,
       webhook: isValidCallbackUrl ? callbackUrl : undefined,
       webhook_events_filter: isValidCallbackUrl ? ['completed'] : undefined,
