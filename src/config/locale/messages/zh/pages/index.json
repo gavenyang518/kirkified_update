@@ -32,7 +32,7 @@
             "variant": "outline"
           }
         ],
-        "show_avatars": true,
+        "show_avatars": false,
         "avatars_tip": "999+ 用户在使用 ShipAny 上站",
         "show_award": false,
         "image": {
