@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 
 import { Link } from '@/core/i18n/navigation';
+import { ImageGenerator } from '@/shared/blocks/generator';
 import { SmartIcon } from '@/shared/blocks/common';
 import { Button } from '@/shared/components/ui/button';
 import { Highlighter } from '@/shared/components/ui/highlighter';
@@ -71,6 +72,12 @@ export function Hero({
           </h1>
         )}
 
+        {section.show_generator_in_hero && (
+          <div className="mx-auto mt-8 mb-8 max-w-6xl">
+            <ImageGenerator className="py-0 md:py-0" />
+          </div>
+        )}
+
         <p
           className="text-muted-foreground mt-8 mb-8 text-lg text-balance"
           dangerouslySetInnerHTML={{ __html: section.description ?? '' }}
@@ -107,7 +114,8 @@ export function Hero({
         )}
       </div>
 
-      {(section.image?.src || section.image_invert?.src) && (
+      {section.show_image !== false &&
+        (section.image?.src || section.image_invert?.src) && (
         <div className="border-foreground/10 relative mt-8 border-y sm:mt-16">
           <div className="relative z-10 mx-auto max-w-6xl border-x px-3">
             <div className="border-x">
