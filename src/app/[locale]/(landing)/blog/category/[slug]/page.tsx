@@ -29,6 +29,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const { locale, slug } = await params;
+  const appUrl = envConfigs.app_url.replace(/\/+$/, '');
   const t = await getTranslations('pages.blog.metadata');
 
   return {
@@ -37,8 +38,8 @@ export async function generateMetadata({
     alternates: {
       canonical:
         locale !== envConfigs.locale
-          ? `${envConfigs.app_url}/${locale}/blog/category/${slug}`
-          : `${envConfigs.app_url}/blog/category/${slug}`,
+          ? `${appUrl}/${locale}/blog/category/${slug}`
+          : `${appUrl}/blog/category/${slug}`,
     },
   };
 }

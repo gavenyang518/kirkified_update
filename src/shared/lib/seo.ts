@@ -23,6 +23,7 @@ export function getMetadata(
   }) {
     const { locale } = await params;
     setRequestLocale(locale);
+    const appUrl = envConfigs.app_url.replace(/\/+$/, '');
 
     // passed metadata
     const passedMetadata = {
@@ -64,7 +65,7 @@ export function getMetadata(
     if (imageUrl.startsWith('http')) {
       imageUrl = imageUrl;
     } else {
-      imageUrl = `${envConfigs.app_url}${imageUrl}`;
+      imageUrl = `${appUrl}${imageUrl}`;
     }
 
     // app name
@@ -130,6 +131,8 @@ async function getTranslatedMetadata(metadataKey: string, locale: string) {
 }
 
 async function getCanonicalUrl(canonicalUrl: string, locale: string) {
+  const appUrl = envConfigs.app_url.replace(/\/+$/, '');
+
   if (!canonicalUrl) {
     canonicalUrl = '/';
   }
@@ -143,7 +146,7 @@ async function getCanonicalUrl(canonicalUrl: string, locale: string) {
       canonicalUrl = `/${canonicalUrl}`;
     }
 
-    canonicalUrl = `${envConfigs.app_url}${
+    canonicalUrl = `${appUrl}${
       !locale || locale === defaultLocale ? '' : `/${locale}`
     }${canonicalUrl}`;
 

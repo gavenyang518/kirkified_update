@@ -14,6 +14,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const { locale, slug } = await params;
+  const appUrl = envConfigs.app_url.replace(/\/+$/, '');
 
   // metadata values
   let title = '';
@@ -35,8 +36,8 @@ export async function generateMetadata({
   // build canonical url
   canonicalUrl =
     locale !== envConfigs.locale
-      ? `${envConfigs.app_url}/${locale}/${staticPageSlug}`
-      : `${envConfigs.app_url}/${staticPageSlug}`;
+      ? `${appUrl}/${locale}/${staticPageSlug}`
+      : `${appUrl}/${staticPageSlug}`;
 
   // get static page content
   const staticPage = await getLocalPage({ slug: staticPageSlug, locale });

@@ -27,6 +27,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const appUrl = envConfigs.app_url.replace(/\/+$/, '');
 
   const t = await getTranslations('common');
 
@@ -35,8 +36,8 @@ export async function generateMetadata({
     alternates: {
       canonical:
         locale !== defaultLocale
-          ? `${envConfigs.app_url}/${locale}/sign-up`
-          : `${envConfigs.app_url}/sign-up`,
+          ? `${appUrl}/${locale}/sign-up`
+          : `${appUrl}/sign-up`,
     },
   };
 }

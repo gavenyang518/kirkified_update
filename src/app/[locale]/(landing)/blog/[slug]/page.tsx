@@ -14,12 +14,13 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const { locale, slug } = await params;
+  const appUrl = envConfigs.app_url.replace(/\/+$/, '');
   const t = await getTranslations('pages.blog.metadata');
 
   const canonicalUrl =
     locale !== envConfigs.locale
-      ? `${envConfigs.app_url}/${locale}/blog/${slug}`
-      : `${envConfigs.app_url}/blog/${slug}`;
+      ? `${appUrl}/${locale}/blog/${slug}`
+      : `${appUrl}/blog/${slug}`;
 
   const post = await getPost({ slug, locale });
   if (!post) {

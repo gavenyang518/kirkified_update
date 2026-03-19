@@ -11,6 +11,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const appUrl = envConfigs.app_url.replace(/\/+$/, '');
   const t = await getTranslations('common');
 
   return {
@@ -18,8 +19,8 @@ export async function generateMetadata({
     alternates: {
       canonical:
         locale !== defaultLocale
-          ? `${envConfigs.app_url}/${locale}/verify-email`
-          : `${envConfigs.app_url}/verify-email`,
+          ? `${appUrl}/${locale}/verify-email`
+          : `${appUrl}/verify-email`,
     },
   };
 }
