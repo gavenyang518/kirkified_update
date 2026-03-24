@@ -77,6 +77,14 @@ export function Footer({ footer }: { footer: FooterType }) {
             <Copyright brand={footer.brand} />
           ) : null}
 
+          <Link
+            href="https://startupfa.st"
+            target="_blank"
+            className="text-muted-foreground hover:text-primary block text-xs break-words underline duration-150"
+          >
+            startupfa.st
+          </Link>
+
           <div className="min-w-0 flex-1"></div>
 
           {footer.agreement ? (
