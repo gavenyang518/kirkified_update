@@ -1,8 +1,8 @@
 import { getTranslations } from 'next-intl/server';
 
-import { envConfigs } from '@/config';
 import { defaultLocale } from '@/config/locale';
 import { redirect } from '@/core/i18n/navigation';
+import { getLocaleAlternates } from '@/shared/lib/seo';
 import { SignUp } from '@/shared/blocks/sign/sign-up';
 import { getConfigs } from '@/shared/models/config';
 import { getSignUser } from '@/shared/models/user';
@@ -27,18 +27,11 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const appUrl = envConfigs.app_url.replace(/\/+$/, '');
-
   const t = await getTranslations('common');
 
   return {
     title: `${t('sign.sign_up_title')} - ${t('metadata.title')}`,
-    alternates: {
-      canonical:
-        locale !== defaultLocale
-          ? `${appUrl}/${locale}/sign-up`
-          : `${appUrl}/sign-up`,
-    },
+    alternates: getLocaleAlternates('/sign-up', locale),
   };
 }
 

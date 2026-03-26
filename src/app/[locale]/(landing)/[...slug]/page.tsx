@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { getThemePage } from '@/core/theme';
-import { envConfigs } from '@/config';
+import { getLocaleAlternates } from '@/shared/lib/seo';
 import { getLocalPage } from '@/shared/models/post';
 
 export const revalidate = 3600;
@@ -14,12 +14,10 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const { locale, slug } = await params;
-  const appUrl = envConfigs.app_url.replace(/\/+$/, '');
 
   // metadata values
   let title = '';
   let description = '';
-  let canonicalUrl = '';
 
   // 1. try to get static page metadata from
   // content/pages/**/*.mdx
@@ -33,11 +31,7 @@ export async function generateMetadata({
     return;
   }
 
-  // build canonical url
-  canonicalUrl =
-    locale !== envConfigs.locale
-      ? `${appUrl}/${locale}/${staticPageSlug}`
-      : `${appUrl}/${staticPageSlug}`;
+  const path = `/${staticPageSlug}`.replace(/\/{2,}/g, '/');
 
   // get static page content
   const staticPage = await getLocalPage({ slug: staticPageSlug, locale });
@@ -50,9 +44,7 @@ export async function generateMetadata({
     return {
       title,
       description,
-      alternates: {
-        canonical: canonicalUrl,
-      },
+      alternates: getLocaleAlternates(path, locale),
     };
   }
 
@@ -74,9 +66,7 @@ export async function generateMetadata({
     return {
       title,
       description,
-      alternates: {
-        canonical: canonicalUrl,
-      },
+      alternates: getLocaleAlternates(path, locale),
     };
   }
 
@@ -89,9 +79,7 @@ export async function generateMetadata({
   return {
     title,
     description,
-    alternates: {
-      canonical: canonicalUrl,
-    },
+    alternates: getLocaleAlternates(path, locale),
   };
 }
 

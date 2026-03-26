@@ -1,7 +1,7 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { envConfigs } from '@/config';
-import { defaultLocale } from '@/config/locale';
+import { defaultLocale, locales } from '@/config/locale';
 
 // get metadata for page component
 export function getMetadata(
@@ -47,11 +47,17 @@ export function getMetadata(
       );
     }
 
+    const canonicalInput = options.canonicalUrl || '/';
+
     // canonical url
     const canonicalUrl = await getCanonicalUrl(
-      options.canonicalUrl || '',
+      canonicalInput,
       locale || ''
     );
+
+    const alternates = canonicalInput.startsWith('http')
+      ? { canonical: canonicalUrl }
+      : getLocaleAlternates(canonicalInput, locale || defaultLocale);
 
     const title =
       passedMetadata.title || translatedMetadata.title || defaultMetadata.title;
@@ -87,9 +93,7 @@ export function getMetadata(
         passedMetadata.keywords ||
         translatedMetadata.keywords ||
         defaultMetadata.keywords,
-      alternates: {
-        canonical: canonicalUrl,
-      },
+      alternates,
 
       openGraph: {
         type: 'website',
@@ -156,4 +160,41 @@ async function getCanonicalUrl(canonicalUrl: string, locale: string) {
   }
 
   return canonicalUrl;
+}
+
+function normalizePath(path: string) {
+  let normalizedPath = path || '/';
+  if (!normalizedPath.startsWith('/')) {
+    normalizedPath = `/${normalizedPath}`;
+  }
+
+  normalizedPath = normalizedPath.replace(/\/{2,}/g, '/');
+  if (normalizedPath !== '/' && normalizedPath.endsWith('/')) {
+    normalizedPath = normalizedPath.slice(0, -1);
+  }
+
+  return normalizedPath;
+}
+
+export function getLocaleAlternates(path: string, locale: string) {
+  const appUrl = envConfigs.app_url.replace(/\/+$/, '');
+  const normalizedPath = normalizePath(path);
+  const languages: Record<string, string> = {};
+
+  for (const loc of locales) {
+    const localePrefix = loc === defaultLocale ? '' : `/${loc}`;
+    const localizedPath =
+      normalizedPath === '/'
+        ? localePrefix || '/'
+        : `${localePrefix}${normalizedPath}`;
+
+    languages[loc] = `${appUrl}${localizedPath}`;
+  }
+
+  languages['x-default'] = languages[defaultLocale];
+
+  return {
+    canonical: languages[locale] || languages[defaultLocale],
+    languages,
+  };
 }

@@ -1,8 +1,8 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { getThemePage } from '@/core/theme';
-import { envConfigs } from '@/config';
 import { Empty } from '@/shared/blocks/common';
+import { getLocaleAlternates } from '@/shared/lib/seo';
 import { getPost } from '@/shared/models/post';
 import { DynamicPage } from '@/shared/types/blocks/landing';
 
@@ -14,31 +14,22 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const { locale, slug } = await params;
-  const appUrl = envConfigs.app_url.replace(/\/+$/, '');
   const t = await getTranslations('pages.blog.metadata');
-
-  const canonicalUrl =
-    locale !== envConfigs.locale
-      ? `${appUrl}/${locale}/blog/${slug}`
-      : `${appUrl}/blog/${slug}`;
+  const path = `/blog/${slug}`;
 
   const post = await getPost({ slug, locale });
   if (!post) {
     return {
       title: `${slug} | ${t('title')}`,
       description: t('description'),
-      alternates: {
-        canonical: canonicalUrl,
-      },
+      alternates: getLocaleAlternates(path, locale),
     };
   }
 
   return {
     title: `${post.title} | ${t('title')}`,
     description: post.description,
-    alternates: {
-      canonical: canonicalUrl,
-    },
+    alternates: getLocaleAlternates(path, locale),
   };
 }
 
